@@ -1,24 +1,62 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 export default class AllPosts extends Component {
 
     state = {
         newPost: {
+            user: '',
             body: '',
-            date: null,
+            date: '',
         },
         allPosts: [],
         creatingPost: false,
     }
 
     componentDidMount() {
+        this.getAllPosts()
         console.log(this.props.userName)
+    }
+
+    getAllPosts = async () => {
+        try {
+            const res = await axios.get('/api/post')
+            const newState = {...this.state}
+            newState.allPosts = res.data
+            this.setState(newState)
+            console.log(this.state.allPosts)
+        } catch (error) {
+            console.log('Failed to get all Posts')
+            console.log(error)
+        }
     }
 
     toggleCreatingPost = () => {
         this.setState({ creatingPost: !this.state.creatingPost })
         console.log(this.state.creatingPost)
+    }
+
+    postInputChange = (evt) => {
+        const newState = {...this.state}
+        newState.newPost[evt.target.name] = evt.target.value
+        this.setState(newState)
+        console.log(this.state.newPost)
+    }
+
+    postSubmit = async (evt) => {
+        evt.preventDefault()
+        let date = `${new Date()}`
+        const newState = {...this.state}
+        newState.newPost.date = date
+        newState.newPost.user = this.props.userName
+        this.setState(newState)
+        try{
+            await axios.post('api/post', this.state.newPost)
+            this.getAllPosts()
+        } catch (error) {
+            console.log('Failed to create post')
+            console.log(error)
+        }
     }
 
     render() {
@@ -27,11 +65,16 @@ export default class AllPosts extends Component {
                 <h1>All Posts</h1>
 
                 <div>
-                    {this.state.allPosts.map(() => {
+                    {this.state.allPosts.map((post) => {
                         return (
-                            <div>
-
-                            </div>
+                            // <Link to= >
+                                <div key={post._id}>
+                                    <div>{post.user}</div>
+                                    <div>{post.body}</div>
+                                    <div>{post.date}</div>
+                                    <div>Comment Number and Rating</div>
+                                </div>
+                            // </Link>
                         )
                     })}
                 </div>
@@ -51,7 +94,11 @@ export default class AllPosts extends Component {
                 </div>
                 {this.state.creatingPost ?
                 <div>
-                    Create Post Form
+                    <form onSubmit={this.postSubmit}>
+                        <label htmlFor="body">Message:</label>
+                        <input onChange={this.postInputChange} type="text" name="body" value={this.state.newPost.body}/>
+                        <input type="submit" value="Post Message"/>
+                    </form>
                 </div> 
                 : null}                    
             </div>
