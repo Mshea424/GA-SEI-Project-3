@@ -1,5 +1,6 @@
 const express = require('express')
 const postRouter = require('./controllers/post.js')
+const commentRouter = require('./controllers/post.js')
 
 const app = express()
 

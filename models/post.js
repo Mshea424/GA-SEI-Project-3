@@ -3,6 +3,7 @@ const mongoose = require('./connection.js')
 const PostSchema = new mongoose.Schema({
     user: String,
     body: String,
+    date: String,
 })
 
 const PostModel = mongoose.model('Post', PostSchema)

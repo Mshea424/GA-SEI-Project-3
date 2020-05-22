@@ -1,36 +1,43 @@
-import React from 'react';
-import {
+import React, { Component } from 'react'
+import{
   BrowserRouter as Router,
   Route,
   Switch
-} from 'react-router-dom';
+} from 'react-router-dom'
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 import AllPosts from './components/AllPosts.js'
-import SinglePost from './components/SinglePost.js'
+import AllComments from './components/AllComments.js'
+import NavBar from './components/NavBar.js'
+import About from './components/About.js'
+import Login from './components/Login.js'
+export default class App extends Component {
+  state = {
+    userName: 'guest',
+  }
 
-import './App.css';
+  getAllPosts = () => {
+    return (<AllPosts userName={this.state.userName} />)
+  }
 
-class App extends React.Component {
+  
 
   render() {
     return (
-      <div className="app-container">
-        <h1>Hello World</h1>
+      <div>
+        App Page
         <Router>
-
+          <NavBar/>
           <Switch>
-
-            <Route exact path="/posts" >
-              <AllPosts />
-            </Route>
-
-            <Route exact path="/posts/:postId" component={SinglePost} />
-
+            <Route exact path="/posts" component={this.getAllPosts}/>
+            <Route exact path="/posts/:postId"></Route>
+            <Route exact path="/comments" component={AllPosts}/>
+            <Route exact path="/comments/:commentId"></Route>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/login" component={Login}/>
           </Switch>
-
         </Router>
       </div>
     )
   }
 }
-
-export default App;
