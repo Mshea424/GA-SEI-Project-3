@@ -5,7 +5,7 @@ export default class NavBar extends Component {
     render() {
         return (
             <div>
-                <Link to="/">Home</Link>
+                <Link to="/posts">Home</Link>
                 <Link to="/">My Posts</Link>
                 <Link to="/about">About This App</Link>
                 <Link to="/login">Login</Link>

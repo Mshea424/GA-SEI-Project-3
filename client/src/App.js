@@ -16,11 +16,21 @@ export default class App extends Component {
     userName: 'guest',
   }
 
+  setUserName = (userName) => {
+    const newState = { ...this.state }
+    newState.userName = userName
+    this.setState(newState)
+  }
+
+  getLogin = () => {
+    return (<Login setUserName = {this.setUserName} />)
+  }
+
   getAllPosts = () => {
     return (<AllPosts userName={this.state.userName} />)
   }
 
-  
+
 
   render() {
     return (
@@ -34,7 +44,7 @@ export default class App extends Component {
             <Route exact path="/comments" component={AllPosts}/>
             <Route exact path="/comments/:commentId"></Route>
             <Route exact path="/about" component={About}/>
-            <Route exact path="/login" component={Login}/>
+            <Route exact path="/login" component={this.getLogin}/>
           </Switch>
         </Router>
       </div>
