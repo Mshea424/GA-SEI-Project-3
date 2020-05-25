@@ -1,8 +1,38 @@
 const express = require('express')
 const postModel = require('../models/post.js')
+// Imports the Google Cloud client library
+const {Translate} = require('@google-cloud/translate').v2;
 
+// Creates a client
+const translate = new Translate();
 const postRouter = express.Router()
 
+// const text = 'The text to translate, e.g. Hello, world!';
+const target = 'ru';
+
+async function translateText(text, target) {
+  // Translates the text into the target language. "text" can be a string for
+  // translating a single piece of text, or an array of strings for translating
+  // multiple texts.
+  let [translations] = await translate.translate(text, target);
+  translations = Array.isArray(translations) ? translations : [translations];
+  console.log('Translations:');
+  translations.forEach((translation, i) => {
+    console.log(`${text[i]} => (${target}) ${translation}`);
+  });
+}
+
+ translateText('Hello, friend. My name is Mike', 'ru');
+
+
+let translatePost = async (reqBody) => {
+    let translatedPost = {
+        date: reqBody.date,
+        user: reqBody.user
+    }
+    translatedPost.body = await translateText(reqBody.body)
+    return translatedPost
+}
 
 // GET ALL
 postRouter.get('/', async (req, res) => {
@@ -29,7 +59,8 @@ postRouter.get('/:postId', async (req, res) => {
 // CREATE
 postRouter.post('/', async (req, res) => {
     try {
-        await postModel.createPost(req.body)
+        let translatedPost = await translatePost(req.body)
+        await postModel.createPost(translatedPost)
         res.json('ok')
     } catch (error) {
         res.statusCode(500).json(error)
