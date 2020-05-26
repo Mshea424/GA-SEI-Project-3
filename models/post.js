@@ -21,7 +21,7 @@ function createPost(PostData) {
 }
 
 function updatePost(PostId, PostData) {
-    PostModel.findByIdAndUpdate(PostId, PostData)
+    return PostModel.findByIdAndUpdate(PostId, PostData)
 }
 
 function deletePost(PostId) {

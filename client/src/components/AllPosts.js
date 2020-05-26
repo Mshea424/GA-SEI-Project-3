@@ -67,14 +67,14 @@ export default class AllPosts extends Component {
                 <div>
                     {this.state.allPosts.map((post) => {
                         return (
-                            // <Link to= >
+                            <Link to={`/posts/${post._id}`}>
                                 <div key={post._id}>
                                     <div>{post.user}</div>
                                     <div>{post.body}</div>
                                     <div>{post.date}</div>
                                     <div>Comment Number and Rating</div>
                                 </div>
-                            // </Link>
+                            </Link>
                         )
                     })}
                 </div>

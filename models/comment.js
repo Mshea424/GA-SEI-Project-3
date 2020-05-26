@@ -22,7 +22,7 @@ function createComment(CommentData) {
 }
 
 function updateComment(CommentId, CommentData) {
-    CommentModel.findByIdAndUpdate(CommentId, CommentData)
+    return CommentModel.findByIdAndUpdate(CommentId, CommentData)
 }
 
 function deleteComment(CommentId) {

@@ -17,12 +17,10 @@ async function translateText(text, target) {
   let [translations] = await translate.translate(text, target);
   translations = Array.isArray(translations) ? translations : [translations];
   console.log('Translations:');
-  translations.forEach((translation, i) => {
-    console.log(`${text[i]} => (${target}) ${translation}`);
-  });
+    return translations[0]
 }
 
- translateText('Hello, friend. My name is Mike', 'ru');
+//  translateText('Hello, friend. My name is Mike', 'ru');
 
 
 let translatePost = async (reqBody) => {
@@ -30,7 +28,17 @@ let translatePost = async (reqBody) => {
         date: reqBody.date,
         user: reqBody.user
     }
-    translatedPost.body = await translateText(reqBody.body)
+    translatedOne = await translateText(reqBody.body, 'ru')
+    translatedTwo = await translateText(translatedOne, 'af')
+    translatedThree = await translateText(translatedTwo, 'zh')
+    translatedFour = await translateText(translatedThree, 'is')
+    translatedFive = await translateText(translatedFour, 'iw')
+    translatedSix = await translateText(translatedFive, 'hi')
+    translatedSeven = await translateText(translatedSix, 'sw')
+    translatedEight = await translateText(translatedSeven, 'haw')
+    translatedDone = await translateText(translatedEight, 'en')
+    // translatedDone = await translateText(translatedThree, 'en')
+    translatedPost.body = translatedDone
     return translatedPost
 }
 
@@ -63,7 +71,7 @@ postRouter.post('/', async (req, res) => {
         await postModel.createPost(translatedPost)
         res.json('ok')
     } catch (error) {
-        res.statusCode(500).json(error)
+        res.status(500).json(error)
         console.log(error)
     }
 })
