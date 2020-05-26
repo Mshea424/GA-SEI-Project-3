@@ -12,8 +12,14 @@ export default class SinglePost extends Component {
             user: '',
             body: ''
         },
-        isEditing: false,
-        isDeleted: false,
+        isEditingPost: false,
+        isDeletedPost: false,
+        createComment: {
+            user: '',
+            postId: '',
+            body: '',
+            date: '',
+        }
     }
 
     componentDidMount() {
@@ -29,8 +35,8 @@ export default class SinglePost extends Component {
         console.log(this.state)
     }
 
-    toggleIsEditing = () => {
-        this.setState({ isEditing: !this.state.isEditing })
+    toggleIsEditingPost = () => {
+        this.setState({ isEditingPost: !this.state.isEditingPost })
     }
 
     inputChange = (evt) => {
@@ -51,13 +57,13 @@ export default class SinglePost extends Component {
     deletePost = async () => {
         const postId = this.props.match.params.postId
         await axios.delete(`/api/post/${postId}`)
-        await this.setState({ isDeleted: !this.state.isDeleted })
+        await this.setState({ isDeletedPost: !this.state.isDeletedPost })
     }
 
     render() {
         return (
             <div>
-                {this.state.isDeleted ?
+                {this.state.isDeletedPost ?
                     <div>
                         <h2>This Post Has Been Deleted</h2>
                         <Link to="/posts">To Return to Home, Click Here</Link>
@@ -67,27 +73,27 @@ export default class SinglePost extends Component {
                         <div>{this.state.body}</div>
                         <div>{this.state.date}</div>
 
-                        <button onClick={this.toggleIsEditing}>
-                            {this.state.isEditing ?
+                        <button onClick={this.toggleIsEditingPost}>
+                            {this.state.isEditingPost ?
                                 <div>Cancel Edits</div> :
                                 <div>Edit Post</div>}
                         </button>
-                        {this.state.isEditing ?
-                        <form onSubmit={this.editSubmit}>
-                            <div>
-                                <label htmlFor="user">Username: </label>
-                                <input onChange={this.inputChange} type="text" name="user" placeholder={this.state.user} />
-                            </div>
-                            <div>
-                                <label htmlFor="body">Post Content: </label>
-                                <input onChange={this.inputChange} type="text" name="body" placeholder={this.state.body} />
-                            </div>
-                            <input type="submit" value="Submit Edits" />
-                        </form> : null}
+                        {this.state.isEditingPost ?
+                            <form onSubmit={this.editSubmit}>
+                                <div>
+                                    <label htmlFor="user">Username: </label>
+                                    <input onChange={this.inputChange} type="text" name="user" placeholder={this.state.user} />
+                                </div>
+                                <div>
+                                    <label htmlFor="body">Post Content: </label>
+                                    <input onChange={this.inputChange} type="text" name="body" placeholder={this.state.body} />
+                                </div>
+                                <input type="submit" value="Submit Edits" />
+                            </form> : null}
                         <button onClick={this.deletePost}>Delete Post</button>
                     </div>}
-                    <div>
-                        comments
+                <div>
+                    comments
                     </div>
             </div>
         )

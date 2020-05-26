@@ -5,7 +5,7 @@ export default class AllComments extends Component {
     state = {
         newComment: {
             user: '',
-            postId:'',
+            postId: '',
             body: '',
             date: '',
         },
@@ -20,7 +20,7 @@ export default class AllComments extends Component {
     getAllComments = async () => {
         try {
             const res = await axios.get('/api/comment')
-            const newState = {...this.state}
+            const newState = { ...this.state }
             newState.allComments = res.data
             this.setState(newState)
             console.log(this.state.allComments)
@@ -30,21 +30,25 @@ export default class AllComments extends Component {
         }
     }
 
+    deleteComment = async (commentId) => {
+        await axios.delete(`/api/comment/${commentId}`)
+        this.getAllComments()
+    }
+
     render() {
         return (
             <div>
-                
+
                 <div>
                     {this.state.allComments.map((comment) => {
                         return (
-                            // <Link to={`/comments/${comment._id}`}>
-                                <div key={comment._id}>
-                                    <div>{comment.user}</div>
-                                    <div>{comment.postId}</div>
-                                    <div>{comment.body}</div>
-                                    <div>{comment.date}</div>
-                                </div>
-                            // </Link>
+                            <div key={comment._id}>
+                                <div>Post ID: {comment.postId}</div>
+                                <div>Commented by: {comment.user}</div>
+                                <div>{comment.body}</div>
+                                <div>{comment.date}</div>
+                                <button onClick={() => this.deleteComment(comment._id)}>Delete this Comment</button>
+                            </div>
                         )
                     })}
                 </div>
