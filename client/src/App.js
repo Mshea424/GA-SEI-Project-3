@@ -31,8 +31,9 @@ export default class App extends Component {
     return (<AllPosts userName={this.state.userName} />)
   }
 
-  getSinglePost = () => {
-    return (<SinglePost userName={this.state.userName} />)
+  getSinglePost = (routerProps) => {
+    return (<SinglePost userName={this.state.userName} {...routerProps}/>)
+  
   }
 
   getAllComments = () => {
@@ -49,7 +50,7 @@ export default class App extends Component {
           <NavBar/>
           <Switch>
             <Route exact path="/posts" component={this.getAllPosts}/>
-            <Route exact path="/posts/:postId" component={SinglePost}/>
+            <Route exact path="/posts/:postId" render={this.getSinglePost}/>
             <Route exact path="/comments" component={this.getAllComments}/>
             <Route exact path="/comments/:commentId"></Route>
             <Route exact path="/about" component={About}/>

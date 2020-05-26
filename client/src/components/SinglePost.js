@@ -19,11 +19,13 @@ export default class SinglePost extends Component {
             postId: '',
             body: '',
             date: '',
-        }
+        },
+        commentsByPostId: []
     }
 
     componentDidMount() {
         this.getPostById()
+        this.getCommentsByPostId()
     }
 
     getPostById = async () => {
@@ -60,6 +62,21 @@ export default class SinglePost extends Component {
         await this.setState({ isDeletedPost: !this.state.isDeletedPost })
     }
 
+    getCommentsByPostId = async () => {
+        const postId = this.props.match.params.postId
+        console.log(this.props)
+        try {
+            const res = await axios.get(`/api/comment/post/${postId}`)
+            const newState = { ...this.state }
+            newState.commentsByPostId = res.data
+            this.setState(newState)
+            console.log(this.state.commentsByPostId)
+        } catch (error) {
+            console.log('Failed to get all Posts')
+            console.log(error)
+        }
+    }
+
     inputChangeComment = (evt) => {
         const newState = { ...this.state }
         newState.createComment[evt.target.name] = evt.target.value
@@ -69,14 +86,15 @@ export default class SinglePost extends Component {
     postComment = async (evt) => {
         evt.preventDefault()
         let date = `${new Date()}`
-        const newState = {...this.state}
+        const newState = { ...this.state }
         newState.createComment.date = date
         newState.createComment.user = this.props.userName
         newState.createComment.postId = this.state._id
         this.setState(newState)
-        try{
+        try {
             await axios.post('/api/comment', this.state.createComment)
             this.getPostById()
+            this.getCommentsByPostId()
         } catch (error) {
             console.log('Failed to create post')
             console.log(error)
@@ -118,14 +136,26 @@ export default class SinglePost extends Component {
                     </div>}
                 <div>
                     comments
-                    <form onSubmit={this.postComment}>
-                                <div>
-                                    <label htmlFor="body">Message: </label>
-                                    <input onChange={this.inputChangeComment} type="text" name="body"/>
+                    <div>
+                        {this.state.commentsByPostId.map((comment) => {
+                            return (
+                                <div key={comment._id}>
+                                    <div>{comment.user}</div>
+                                    <div>{comment.body}</div>
+                                    <div>{comment.date}</div>
+                                    <div>Comment Number and Rating</div>
                                 </div>
-                                <input type="submit" value="Post Comment" />
-                            </form> 
+                            )
+                        })}
                     </div>
+                    <form onSubmit={this.postComment}>
+                        <div>
+                            <label htmlFor="body">Message: </label>
+                            <input onChange={this.inputChangeComment} type="text" name="body" />
+                        </div>
+                        <input type="submit" value="Post Comment" />
+                    </form>
+                </div>
             </div>
         )
     }

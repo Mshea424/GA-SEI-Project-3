@@ -10,7 +10,11 @@ const CommentSchema = new mongoose.Schema({
 const CommentModel = mongoose.model('Comment', CommentSchema)
 
 function getAllComments() {
-    return CommentModel.find({})
+    return CommentModel.find({}).sort({date: -1})
+}
+
+function getCommentsByPostId(id) {
+    return CommentModel.find({postId: id}).sort({date: 1})
 }
 
 function getCommentById(CommentId) {
@@ -32,6 +36,7 @@ function deleteComment(CommentId) {
 
 module.exports = {
     getAllComments,
+    getCommentsByPostId,
     getCommentById,
     createComment,
     updateComment,

@@ -5,11 +5,14 @@ const postModel = require('../models/post.js')
 const commentRouter = express.Router()
 
 
-// GET ALL
-commentRouter.get('/', async (req, res) => {
-    try {
-        const allComments = await commentModel.getAllComments()
-        res.json(allComments)
+
+// GET MULTIPLE BY POST ID
+
+commentRouter.get('/post/:postId', async (req, res) =>{
+    try
+    {
+        const postIDComments = await commentModel.getCommentsByPostId(req.params.postId)
+        res.json(postIDComments) 
     } catch (error) {
         res.statusCode(500).json(error)
         console.log(error)
@@ -56,6 +59,17 @@ commentRouter.delete('/:commentId', async (req, res) => {
     try {
         await commentModel.deleteComment(req.params.commentId)
         res.json("ok")
+    } catch (error) {
+        res.statusCode(500).json(error)
+        console.log(error)
+    }
+})
+
+// GET ALL
+commentRouter.get('/', async (req, res) => {
+    try {
+        const allComments = await commentModel.getAllComments()
+        res.json(allComments)
     } catch (error) {
         res.statusCode(500).json(error)
         console.log(error)
