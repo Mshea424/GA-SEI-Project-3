@@ -31,6 +31,10 @@ export default class App extends Component {
     return (<AllPosts userName={this.state.userName} />)
   }
 
+  getSinglePost = () => {
+    return (<SinglePost userName={this.state.userName} />)
+  }
+
   getAllComments = () => {
     return (<AllComments userName={this.state.userName} />)
   }

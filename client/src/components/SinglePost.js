@@ -60,6 +60,30 @@ export default class SinglePost extends Component {
         await this.setState({ isDeletedPost: !this.state.isDeletedPost })
     }
 
+    inputChangeComment = (evt) => {
+        const newState = { ...this.state }
+        newState.createComment[evt.target.name] = evt.target.value
+        this.setState(newState)
+        console.log(this.state.createComment)
+    }
+    postComment = async (evt) => {
+        evt.preventDefault()
+        let date = `${new Date()}`
+        const newState = {...this.state}
+        newState.createComment.date = date
+        newState.createComment.user = this.props.userName
+        newState.createComment.postId = this.state._id
+        this.setState(newState)
+        try{
+            await axios.post('/api/comment', this.state.createComment)
+            this.getPostById()
+        } catch (error) {
+            console.log('Failed to create post')
+            console.log(error)
+        }
+
+    }
+
     render() {
         return (
             <div>
@@ -94,6 +118,13 @@ export default class SinglePost extends Component {
                     </div>}
                 <div>
                     comments
+                    <form onSubmit={this.postComment}>
+                                <div>
+                                    <label htmlFor="body">Message: </label>
+                                    <input onChange={this.inputChangeComment} type="text" name="body"/>
+                                </div>
+                                <input type="submit" value="Post Comment" />
+                            </form> 
                     </div>
             </div>
         )
