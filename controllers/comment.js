@@ -29,7 +29,7 @@ commentRouter.get('/:commentId', async (req, res) => {
 })
 
 // CREATE
-commentRouter.comment('/', async (req, res) => {
+commentRouter.post('/', async (req, res) => {
     try {
         await commentModel.createComment(req.body)
         res.json('ok')

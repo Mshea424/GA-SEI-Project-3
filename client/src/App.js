@@ -31,6 +31,10 @@ export default class App extends Component {
     return (<AllPosts userName={this.state.userName} />)
   }
 
+  getAllComments = () => {
+    return (<AllComments userName={this.state.userName} />)
+  }
+
 
 
   render() {
@@ -42,7 +46,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/posts" component={this.getAllPosts}/>
             <Route exact path="/posts/:postId" component={SinglePost}/>
-            <Route exact path="/comments" component={AllPosts}/>
+            <Route exact path="/comments" component={this.getAllComments}/>
             <Route exact path="/comments/:commentId"></Route>
             <Route exact path="/about" component={About}/>
             <Route exact path="/login" component={this.getLogin}/>

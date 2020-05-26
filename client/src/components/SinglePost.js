@@ -86,6 +86,9 @@ export default class SinglePost extends Component {
                         </form> : null}
                         <button onClick={this.deletePost}>Delete Post</button>
                     </div>}
+                    <div>
+                        comments
+                    </div>
             </div>
         )
     }
