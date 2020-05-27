@@ -108,6 +108,7 @@ export default class SinglePost extends Component {
                 {this.state.isDeletedPost ?
                     <div>
                         <h2>This Post Has Been Deleted</h2>
+                        <p>Any comments attached to this post will need to be reviewed via the <Link to="/comments">All Comments Admin Page</Link></p>
                         <Link to="/posts">To Return to Home, Click Here</Link>
                     </div> :
                     <div>
