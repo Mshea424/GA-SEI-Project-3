@@ -41,7 +41,10 @@ body {
 
 .card {
   display: block;
-  width: 80%;
+  width: 90%;
   background-color: seashell;
-  margin: 20px 0;
+  margin: 20px auto;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
