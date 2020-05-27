@@ -7,8 +7,9 @@ body {
 }
 
 .header {
-  width: 100%;
+  width: 95%;
   height: 100px;
+  margin: 0 auto;
   background-color: seashell;
   font-size: 60px;
   line-height: 100px;
