@@ -122,12 +122,14 @@ export default class SinglePost extends Component {
                         <div>{this.state.user}</div>
                         <div>{this.state.body}</div>
                         <div>{this.state.date}</div>
-
+                        {this.props.userName === 'Admin' ?
+                        <div>
                         <button onClick={this.toggleIsEditingPost}>
                             {this.state.isEditingPost ?
                                 <div>Cancel Edits</div> :
                                 <div>Edit Post</div>}
                         </button>
+                        <div> 
                         {this.state.isEditingPost ?
                             <form onSubmit={this.editSubmit}>
                                 <div>
@@ -141,9 +143,12 @@ export default class SinglePost extends Component {
                                 <input type="submit" value="Submit Edits" />
                             </form> : null
                         }
+                        </div>
                         <button onClick={this.deletePost}>Delete Post</button>
+                        </div> :
+                        null}
                     </div>
-                }
+                } 
                 <div>
                     comments
                     <div>
