@@ -56,12 +56,32 @@ body {
   line-height: 40px;
 }
 
+.card-content {
+  text-decoration: none;
+  color: black;
+}
+
+.user {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.body {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.date {
+  color: gray;
+  font-size: 14px;
+}
 .comment-sheet {
   display: block;
   width: 90%;
   background-color: seashell;
   margin: 20px auto;
   padding: 30px;
+  border-radius: 4px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
   line-height: 40px;
 
@@ -72,4 +92,27 @@ body {
   margin-top: 30px;
   padding-top: 30px;
   border-top: 1px solid lightgray;
+}
+
+.post-button {
+  display: block;
+  width: 60%;
+  margin: 10px auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: lightgray;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.post-form {
+  display: block;
+  width: 90%;
+  background-color: seashell;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  line-height: 40px;
 }

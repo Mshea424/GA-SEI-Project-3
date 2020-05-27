@@ -42,7 +42,7 @@ export default class AllComments extends Component {
                 <div>
                     {this.state.allComments.map((comment) => {
                         return (
-                            <div key={comment._id}>
+                            <div className="comment-sheet" key={comment._id}>
                                 <div>Post ID: {comment.postId}</div>
                                 <div>Commented by: {comment.user}</div>
                                 <div>{comment.body}</div>

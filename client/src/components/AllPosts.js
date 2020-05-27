@@ -68,11 +68,11 @@ export default class AllPosts extends Component {
                 <div>
                     {this.state.allPosts.map((post) => {
                         return (
-                            <Link to={`/posts/${post._id}`}>
+                            <Link className="card-content" to={`/posts/${post._id}`}>
                                 <div className="card" key={post._id}>
-                                    <div>{post.user} says:</div>
-                                    <div>"{post.body}"</div>
-                                    <div>Posted on: {post.date}</div>
+                                    <div className="user">{post.user} says:</div>
+                                    <div className="body">"{post.body}"</div>
+                                    <div className="date">Posted on: {post.date}</div>
                                     {this.props.userName === 'Admin' ?
                                     <div>Click to View & Edit</div> :
                                     null}
@@ -84,23 +84,25 @@ export default class AllPosts extends Component {
 
                 <div>
                     {this.props.userName === 'guest' ?
-                        <div>
+                        <div className="post-button">
                             <div>To make your own post, Please Choose a Nickname</div>
                             <Link to="/login">Choose Nickname</Link>
                         </div> :
 
                         <div onClick={this.toggleCreatingPost}>
                             {this.state.creatingPost ?
-                                <div>Cancel this Form</div> :
-                                <div>Post New Message</div>}
+                                <div className="post-button">Cancel this Form</div> :
+                                <div className="post-button">Post New Message</div>}
                         </div>}
                 </div>
                 {this.state.creatingPost ?
                 <div>
                     <form onSubmit={this.postSubmit}>
+                        <div className="post-form">
                         <label htmlFor="body">Message:</label>
                         <input onChange={this.postInputChange} type="text" name="body" value={this.state.newPost.body}/>
-                        <input type="submit" value="Post Message"/>
+                        </div>
+                        <input className="post-button" type="submit" value="Post Message"/>
                     </form>
                 </div> 
                 : null}                    

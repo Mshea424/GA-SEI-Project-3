@@ -119,9 +119,9 @@ export default class SinglePost extends Component {
                         <Link to="/posts">To Return to Home, Click Here</Link>
                     </div> :
                     <div className="card">
-                        <div>{this.state.user}</div>
-                        <div>{this.state.body}</div>
-                        <div>{this.state.date}</div>
+                        <div className="user">{this.state.user} says:</div>
+                        <div className="body">"{this.state.body}"</div>
+                        <div className="date">Posted on: {this.state.date}</div>
                         {this.props.userName === 'Admin' ?
                         <div>
                         <button onClick={this.toggleIsEditingPost}>
@@ -167,17 +167,17 @@ export default class SinglePost extends Component {
                     </div>
                 </div>
                 {this.props.userName === 'guest' ?
-                    <div>
+                    <div className="post-button">
                         <div>To make a Comment, Please Choose a Nickname</div>
                         <Link to="/login">Choose Nickname</Link>
                     </div> :
                     <div>
                         <form onSubmit={this.postComment}>
-                            <div>
+                            <div className="post-form">
                                 <label htmlFor="body">Message: </label>
                                 <input onChange={this.inputChangeComment} type="text" name="body" />
                             </div>
-                            <input type="submit" value="Post Comment" />
+                            <input className="post-button" type="submit" value="Post Comment" />
                         </form>
                     </div>
                 }
