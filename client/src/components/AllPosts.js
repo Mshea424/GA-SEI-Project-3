@@ -62,7 +62,7 @@ export default class AllPosts extends Component {
     render() {
         return (
             <div>
-                <h1>All Posts</h1>
+                <h1>{this.props.userName === 'Admin' ? 'Welcome, all Mighty & Powerful ADMIN!' : 'All Posts'}</h1>
 
                 <div>
                     {this.state.allPosts.map((post) => {
@@ -72,7 +72,9 @@ export default class AllPosts extends Component {
                                     <div>{post.user}</div>
                                     <div>{post.body}</div>
                                     <div>{post.date}</div>
-                                    <div>Comment Number and Rating</div>
+                                    {this.props.userName === 'Admin' ?
+                                    <div>Click to View & Edit</div> :
+                                    null}
                                 </div>
                             </Link>
                         )
