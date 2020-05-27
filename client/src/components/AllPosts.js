@@ -62,8 +62,9 @@ export default class AllPosts extends Component {
     render() {
         return (
             <div>
-                <h1>{this.props.userName === 'Admin' ? 'Welcome, all Mighty & Powerful ADMIN!' : 'Home Feed'}</h1>
-
+                <div className="banner">
+                    <h1>{this.props.userName === 'Admin' ? 'Welcome, all Mighty & Powerful ADMIN!' : `Welcome to our message board, ${this.props.userName}!`}</h1>
+                </div>
                 <div>
                     {this.state.allPosts.map((post) => {
                         return (

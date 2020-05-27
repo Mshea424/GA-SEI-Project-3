@@ -113,12 +113,12 @@ export default class SinglePost extends Component {
         return (
             <div>
                 {this.state.isDeletedPost ?
-                    <div>
+                    <div className="banner">
                         <h2>This Post Has Been Deleted</h2>
                         <p>Any comments attached to this post will need to be reviewed via the <Link to="/comments">All Comments Admin Page</Link></p>
                         <Link to="/posts">To Return to Home, Click Here</Link>
                     </div> :
-                    <div>
+                    <div className="card">
                         <div>{this.state.user}</div>
                         <div>{this.state.body}</div>
                         <div>{this.state.date}</div>
@@ -149,15 +149,15 @@ export default class SinglePost extends Component {
                         null}
                     </div>
                 } 
-                <div>
-                    comments
+                <div className="comment-sheet">
+                    Comments on this post:
                     <div>
                         {this.state.commentsByPostId.map((comment) => {
                             return (
-                                <div key={comment._id}>
-                                    <div>{comment.user}</div>
-                                    <div>{comment.body}</div>
-                                    <div>{comment.date}</div>
+                                <div className="comment" key={comment._id}>
+                                    <div>Commented By: {comment.user}</div>
+                                    <div>"{comment.body}"</div>
+                                    <div>Posted On: {comment.date}</div>
                                     {this.props.userName === 'Admin' ?
                                     <button onClick={() => this.deletePostIdComment(comment._id)}>Delete Comment</button> :
                                     null}
