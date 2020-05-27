@@ -69,9 +69,9 @@ export default class AllPosts extends Component {
                         return (
                             <Link to={`/posts/${post._id}`}>
                                 <div className="card" key={post._id}>
-                                    <div>{post.user}</div>
-                                    <div>{post.body}</div>
-                                    <div>{post.date}</div>
+                                    <div>{post.user} says:</div>
+                                    <div>"{post.body}"</div>
+                                    <div>Posted on: {post.date}</div>
                                     {this.props.userName === 'Admin' ?
                                     <div>Click to View & Edit</div> :
                                     null}
