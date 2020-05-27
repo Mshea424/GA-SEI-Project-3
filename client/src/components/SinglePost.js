@@ -153,7 +153,9 @@ export default class SinglePost extends Component {
                                     <div>{comment.user}</div>
                                     <div>{comment.body}</div>
                                     <div>{comment.date}</div>
-                                    <button onClick={() => this.deletePostIdComment(comment._id)}>Delete Comment</button>
+                                    {this.props.userName === 'Admin' ?
+                                    <button onClick={() => this.deletePostIdComment(comment._id)}>Delete Comment</button> :
+                                    null}
                                 </div>
                             )
                         })}
