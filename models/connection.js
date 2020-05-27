@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const connectionStr = process.env.MONGODB_URL || 'mongodb://localhost/sei-p-3'
+const connectionStr = process.env.MONGODB_URI || 'mongodb://localhost/sei-p-3'
 
 mongoose.connect(connectionStr)
     .then(() => {
