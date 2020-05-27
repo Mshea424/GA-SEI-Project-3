@@ -62,13 +62,13 @@ export default class AllPosts extends Component {
     render() {
         return (
             <div>
-                <h1>{this.props.userName === 'Admin' ? 'Welcome, all Mighty & Powerful ADMIN!' : 'All Posts'}</h1>
+                <h1>{this.props.userName === 'Admin' ? 'Welcome, all Mighty & Powerful ADMIN!' : 'Home Feed'}</h1>
 
                 <div>
                     {this.state.allPosts.map((post) => {
                         return (
                             <Link to={`/posts/${post._id}`}>
-                                <div key={post._id}>
+                                <div className="card" key={post._id}>
                                     <div>{post.user}</div>
                                     <div>{post.body}</div>
                                     <div>{post.date}</div>

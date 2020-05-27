@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css';
 import{
   BrowserRouter as Router,
   Route,
@@ -6,6 +7,7 @@ import{
 } from 'react-router-dom'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+
 import AllPosts from './components/AllPosts.js'
 import SinglePost from './components/SinglePost.js'
 import AllComments from './components/AllComments.js'
@@ -44,8 +46,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        App Page
+      <div className="wrapper">
+        <div className="header">Lost In Translation</div>
         <Router>
           <NavBar userName={this.state.userName}/>
           <Switch>
