@@ -77,12 +77,19 @@ export default class SinglePost extends Component {
         }
     }
 
+    deletePostIdComment = async (commentId) => {
+        await axios.delete(`/api/comment/${commentId}`)
+        this.getPostById()
+        this.getCommentsByPostId()
+    }
+
     inputChangeComment = (evt) => {
         const newState = { ...this.state }
         newState.createComment[evt.target.name] = evt.target.value
         this.setState(newState)
         console.log(this.state.createComment)
     }
+
     postComment = async (evt) => {
         evt.preventDefault()
         let date = `${new Date()}`
@@ -146,7 +153,7 @@ export default class SinglePost extends Component {
                                     <div>{comment.user}</div>
                                     <div>{comment.body}</div>
                                     <div>{comment.date}</div>
-                                    <div>Comment Number and Rating</div>
+                                    <button onClick={() => this.deletePostIdComment(comment._id)}>Delete Comment</button>
                                 </div>
                             )
                         })}
