@@ -47,7 +47,7 @@ export default class App extends Component {
       <div>
         App Page
         <Router>
-          <NavBar/>
+          <NavBar userName={this.state.userName}/>
           <Switch>
             <Route exact path="/posts" component={this.getAllPosts}/>
             <Route exact path="/posts/:postId" render={this.getSinglePost}/>
