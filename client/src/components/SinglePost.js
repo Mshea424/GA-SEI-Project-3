@@ -131,9 +131,11 @@ export default class SinglePost extends Component {
                                     <input onChange={this.inputChange} type="text" name="body" placeholder={this.state.body} />
                                 </div>
                                 <input type="submit" value="Submit Edits" />
-                            </form> : null}
+                            </form> : null
+                        }
                         <button onClick={this.deletePost}>Delete Post</button>
-                    </div>}
+                    </div>
+                }
                 <div>
                     comments
                     <div>
@@ -148,14 +150,22 @@ export default class SinglePost extends Component {
                             )
                         })}
                     </div>
-                    <form onSubmit={this.postComment}>
-                        <div>
-                            <label htmlFor="body">Message: </label>
-                            <input onChange={this.inputChangeComment} type="text" name="body" />
-                        </div>
-                        <input type="submit" value="Post Comment" />
-                    </form>
                 </div>
+                {this.props.userName === 'guest' ?
+                    <div>
+                        <div>To make a Comment, Please Choose a Nickname</div>
+                        <Link to="/login">Choose Nickname</Link>
+                    </div> :
+                    <div>
+                        <form onSubmit={this.postComment}>
+                            <div>
+                                <label htmlFor="body">Message: </label>
+                                <input onChange={this.inputChangeComment} type="text" name="body" />
+                            </div>
+                            <input type="submit" value="Post Comment" />
+                        </form>
+                    </div>
+                }
             </div>
         )
     }
