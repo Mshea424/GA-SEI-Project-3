@@ -14,7 +14,9 @@ export default class About extends Component {
                 --PS: If you've had enough fun & want to turn on God powers (or if one of your posts landed outside your comfort zone)<br/>
                 you can enable Admin View by simply changing your Nickname to 'Admin', via the top nav bar. this will give you the ability<br/>
                 to edit or delete any of your posts/comments, or anyone else's. And, for that reason, I will not claim any responsibility for what might<br/>
-                be posted on this forum. Everyone is a god here! What could go wrong?
+                be posted on this forum. Everyone is a god here! What could go wrong? <br/>
+                <br/>
+                Languages Used: English, Russian, Afrikaans, Mandarin Chinese, Icelandic, Hebrew, Hindi, Swahili, Hawaiian
                 </p>
             </div>
         )
