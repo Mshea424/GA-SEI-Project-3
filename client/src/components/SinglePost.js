@@ -138,7 +138,7 @@ export default class SinglePost extends Component {
                                 </div>
                                 <div>
                                     <label htmlFor="body">Post Content: </label>
-                                    <input onChange={this.inputChange} type="text" name="body" placeholder={this.state.body} />
+                                    <textarea onChange={this.inputChange} cols="80" rows="10" id="body" name="body"></textarea>
                                 </div>
                                 <input type="submit" value="Submit Edits" />
                             </form> : null
@@ -175,7 +175,7 @@ export default class SinglePost extends Component {
                         <form onSubmit={this.postComment}>
                             <div className="post-form">
                                 <label htmlFor="body">Message: </label>
-                                <input onChange={this.inputChangeComment} type="text" name="body" />
+                                <textarea onChange={this.inputChangeComment} cols="80" rows="10" id="body" name="body"></textarea>
                             </div>
                             <input className="post-button" type="submit" value="Post Comment" />
                         </form>

@@ -100,7 +100,7 @@ export default class AllPosts extends Component {
                     <form onSubmit={this.postSubmit}>
                         <div className="post-form">
                         <label htmlFor="body">Message:</label>
-                        <input onChange={this.postInputChange} type="text" name="body" value={this.state.newPost.body}/>
+                        <textarea onChange={this.postInputChange} cols="80" rows="10" id="body" name="body"></textarea>
                         </div>
                         <input className="post-button" type="submit" value="Post Message"/>
                     </form>
